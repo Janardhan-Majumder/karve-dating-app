@@ -1,0 +1,24 @@
+.ant-table-wrapper table {
+    /* width: 100%;
+      text-align: start; */
+    border-radius: 0;
+    /* border-collapse: separate;
+      border-spacing: 0; */
+  }
+  .ant-table-wrapper
+    .ant-table-container
+    table
+    > thead
+    > tr:first-child
+    > *:first-child {
+    border-start-start-radius: 0px;
+  }
+  
+  .ant-table-wrapper
+    .ant-table-container
+    table
+    > thead
+    > tr:first-child
+    > *:last-child {
+    border-start-end-radius: 0;
+  }
