@@ -2,7 +2,7 @@ import { baseApi } from "../../api/baseApi";
 
 const settingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getSettings: builder.query({
+    getTerms: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
         if (args) {
@@ -11,22 +11,77 @@ const settingApi = baseApi.injectEndpoints({
           });
         }
         return {
-          url: "/app-data",
+          url: "/terms-and-condition",
           method: "GET",
           params,
         };
       },
-      providesTags: ["setting"],
+      providesTags: ["terms"],
     }),
-    updateSettings: builder.mutation({
+    updateTerms: builder.mutation({
       query: (body) => ({
-        url: "/app-data",
+        url: "/terms-and-condition",
         method: "PUT",
-        body : body,
+        body: body,
       }),
-      invalidatesTags: ["setting"],
+      invalidatesTags: ["terms"],
+    }),
+    getPrivacy: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item) => {
+            params.append(item.name, item.value);
+          });
+        }
+        return {
+          url: "/privacy-policy",
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: ["privacy"],
+    }),
+    updatePrivacy: builder.mutation({
+      query: (body) => ({
+        url: "/privacy-policy",
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["privacy"],
+    }),
+    getAbouts: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item) => {
+            params.append(item.name, item.value);
+          });
+        }
+        return {
+          url: "/about-us",
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: ["about"],
+    }),
+    updateAbouts: builder.mutation({
+      query: (body) => ({
+        url: "/about-us",
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: ["about"],
     }),
   }),
 });
 
-export const { useGetSettingsQuery, useUpdateSettingsMutation } = settingApi;
+export const {
+  useGetTermsQuery,
+  useUpdateTermsMutation,
+  useGetPrivacyQuery,
+  useUpdatePrivacyMutation,
+  useGetAboutsQuery,
+  useUpdateAboutsMutation,
+} = settingApi;
