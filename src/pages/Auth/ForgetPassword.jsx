@@ -17,7 +17,6 @@ const ForgetPassword = () => {
       
       if (response?.data?.statusCode == 200) {
         localStorage.setItem("phone", values.phone);
-        localStorage.setItem("token", response?.data?.data);
         navigate(`/auth/verify`);
       } else {
         Swal.fire({
@@ -53,7 +52,7 @@ const ForgetPassword = () => {
             <h5 className="text-2xl font-medium">Forget Password</h5>
           </div>
           <p className="text-center">
-            Please enter your email address to reset your password.
+            Please enter your phone number to reset your password.
           </p>
           <Form
             name="basic"

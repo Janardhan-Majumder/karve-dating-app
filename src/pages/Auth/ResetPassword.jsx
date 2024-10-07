@@ -18,7 +18,7 @@ const ResetPassword = () => {
         },
       });
       if (response?.data?.statusCode == 200) {
-        localStorage.setItem("token", null);
+        localStorage.setItem("verify-token", null);
         navigate("/auth");
         Swal.fire({
           position: "top-center",
@@ -57,7 +57,7 @@ const ResetPassword = () => {
       <div className="bg-[#FFD9B0] w-full h-full flex justify-center items-center">
         <div className=" w-[451px] bg-[#FFF3E6] py-[64px] px-[44px] rounded-2xl space-y-7">
           <div className="flex justify-center items-center gap-1">
-            <FaArrowLeft size={20} />
+            <FaArrowLeft size={20} onClick={() => navigate(-1)}/>
             <h5 className="text-2xl font-medium">Reset Password</h5>
           </div>
           <p className="text-center">

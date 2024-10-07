@@ -1,10 +1,7 @@
-import { useState } from "react";
-import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
-const PhoneCountryInput = () => {
-  const [phoneNumber, setPhoneNumber] = useState("175454545");
-  console.log(phoneNumber);
+const PhoneCountryInput = ({ phoneNumber, setPhoneNumber }) => {
   return (
     <PhoneInput
       className="custom-phone "

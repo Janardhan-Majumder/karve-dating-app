@@ -1,26 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Form, Input } from "antd";
-import dashProfile from "../../../assets/images/dashboard-profile.png";
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import PhoneCountryInput from "../../../Components/PhoneCountryInput";
+import { useSelector } from "react-redux";
 
 const MyProfile = () => {
-  const [code, setCode] = useState();
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const onFinish = (values) => {
-    console.log("Success:", values);
+    navigate(`/edit-profile/${"123456fdsfa"}`);
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  const profileData = {
-    name: "Enrique",
-    email: "enrique@gmail.com",
-    phone: "+880 150597212",
-    profile: dashProfile,
-  };
-  console.log(code);
 
   return (
     <div className="pt-5">
@@ -29,13 +18,18 @@ const MyProfile = () => {
         layout="vertical"
         className="w-full grid grid-cols-12 gap-x-5"
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        initialValues={user}
         autoComplete="off"
       >
         <div className="col-span-4 h-[365px] flex flex-col items-center justify-center bg-[#FFF3E6] px-8 py-8 rounded-xl border-2 border-[#FFD9B0] space-y-4">
           <div className="my-3 ">
             <img
-              src={dashProfile}
+              src={
+                user?.profilePictureUrl
+                  ? `${import.meta.env.VITE_SERVER_URL}` +
+                    user.profilePictureUrl?.publicFileURL
+                  : profileImage
+              }
               alt=""
               className="h-[144px] w-[144px] rounded-full"
             />
@@ -50,7 +44,6 @@ const MyProfile = () => {
             name="name"
           >
             <Input
-              defaultValue={profileData.name}
               disabled
               style={{
                 border: "1px solid #FF8400",
@@ -64,7 +57,6 @@ const MyProfile = () => {
             name="email"
           >
             <Input
-              defaultValue={profileData.email}
               disabled
               style={{
                 border: "1px solid #FF8400",
@@ -77,11 +69,16 @@ const MyProfile = () => {
             label="Phone Number"
             name="phone"
           >
-            <PhoneCountryInput />
+            <Input
+              disabled
+              style={{
+                border: "1px solid #FF8400",
+              }}
+              className="h-[56px] border rounded-lg border-[#FF8400] bg-[#FFF3E6] disabled:text-[#222222] disabled:bg-[#FFF3E6] mt-3"
+            />
           </Form.Item>
           <div className="flex justify-end">
             <Button
-              onClick={(e) => navigate(`/edit-profile/${"123456fdsfa"}`)}
               style={{
                 backgroundColor: "#FF8400",
                 color: "#fff",

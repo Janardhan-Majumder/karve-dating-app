@@ -13,8 +13,7 @@ const SignIn = () => {
   const [setData, { isLoading }] = usePostLoginMutation();
   const dispatch = useDispatch();
   const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
-  // console.log(location.state);
+  const from = location.state || "/";
   const onFinish = async (values) => {
     try {
       const response = await setData(values);
@@ -34,8 +33,7 @@ const SignIn = () => {
             showConfirmButton: false,
             timer: 1000,
           });
-          // navigate(from, { replace: true });
-          navigate(location.state ? location.state : "/");
+          navigate(from, { replace: true });
         } else {
           Swal.fire({
             icon: "error",
@@ -73,7 +71,7 @@ const SignIn = () => {
       <div className="bg-[#FFD9B0] w-full h-full flex justify-center items-center">
         <div className=" w-[451px] bg-[#FFF3E6] py-[64px] px-[44px] rounded-2xl">
           <h5 className="text-3xl font-medium text-center mb-[24px]">
-            Singn In
+            Sign In
           </h5>
           <Form
             name="basic"

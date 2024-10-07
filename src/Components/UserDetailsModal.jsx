@@ -36,7 +36,7 @@ const UserDetailsModal = ({ isModalOpen, setIsModalOpen, userDetails }) => {
           </div>
           <div className="flex justify-between">
             <p>Email</p>
-            <p className="font-medium">{userDetails.email}</p>
+            <p className="font-medium">{userDetails.email || "N/A"}</p>
           </div>
           <div className="flex justify-between">
             <p>Phone Number</p>
@@ -48,7 +48,7 @@ const UserDetailsModal = ({ isModalOpen, setIsModalOpen, userDetails }) => {
           </div>
           <div className="flex justify-between">
             <p>Joining Date</p>
-            <p className="font-medium">{userDetails.joinDate}</p>
+            <p className="font-medium">{new Date(userDetails.createdAt).toDateString()}</p>
           </div>
         </div>
       </div>

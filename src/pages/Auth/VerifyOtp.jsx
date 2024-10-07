@@ -27,7 +27,7 @@ const VerifyOtp = () => {
         code: Number(otp),
       });
       if (response?.data?.statusCode == 200) {
-        localStorage.setItem("token", response?.data?.data?.token);
+        localStorage.setItem("verify-token", response?.data?.data?.token);
         navigate(`/auth/reset-password`);
       } else {
         Swal.fire({

@@ -1,33 +1,19 @@
 import React, { useState } from "react";
 import { Button, Form, Input } from "antd";
 import dashProfile from "../../assets/images/dashboard-profile.png";
-// import "react-phone-number-input/style.css";
-// import PhoneInput from "react-phone-number-input";
-import { FiEdit } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PiCameraPlus } from "react-icons/pi";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowLeftLong } from "react-icons/fa6";
 import { LiaArrowLeftSolid } from "react-icons/lia";
 import PhoneCountryInput from "../../Components/PhoneCountryInput";
+import { useSelector } from "react-redux";
 
 const EditProfile = () => {
-  const [code, setCode] = useState();
   const navigate = useNavigate();
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  const profileData = {
-    name: "Enrique",
-    email: "enrique@gmail.com",
-    phone: "+880 150597212",
-    profile: dashProfile,
-  };
-  console.log(code);
-
+  const [code, setCode] = useState();
+  const { user } = useSelector((state) => state.auth);
+  const [phoneNumber, setPhoneNumber] = useState();
+  const onFinish = (values) => {};
+console.log(phoneNumber)
   return (
     <div className="space-y-5">
       <div className="flex items-center gap-1.5">
@@ -41,8 +27,8 @@ const EditProfile = () => {
         layout="vertical"
         className="w-full grid grid-cols-12 gap-x-5"
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
+        initialValues={user}
       >
         <div className="col-span-4 h-[365px] flex flex-col items-center justify-center bg-[#FFF3E6] px-8 py-8 rounded-xl border-2 border-[#FFD9B0] space-y-4">
           <div className="my-3 relative">
@@ -65,10 +51,7 @@ const EditProfile = () => {
             label="Name"
             name="name"
           >
-            <Input
-              defaultValue={profileData.name}
-              className="h-[56px] border rounded-lg border-[#FFAD54] bg-[#FFF3E6] disabled:text-[#222222] disabled:bg-[#FFF3E6] mt-3"
-            />
+            <Input className="h-[56px] border rounded-lg border-[#FFAD54] bg-[#FFF3E6] disabled:text-[#222222] disabled:bg-[#FFF3E6] mt-3" />
           </Form.Item>
           <Form.Item
             className="text-lg text-[#222222] font-medium"
@@ -76,14 +59,13 @@ const EditProfile = () => {
             name="email"
           >
             <Input
-              defaultValue={profileData.email}
+              readOnly
               className="h-[56px] border rounded-lg border-[#FFAD54] bg-[#FFF3E6] disabled:text-[#222222] disabled:bg-[#FFF3E6] mt-3"
             />
           </Form.Item>
           <Form.Item
             className="text-lg text-[#222222] font-medium"
             label="Phone Number"
-            name="phone"
           >
             <PhoneCountryInput />
           </Form.Item>

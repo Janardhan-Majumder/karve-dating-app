@@ -2,21 +2,9 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar";
 import DashboardHeader from "../../Components/DashboardHeader";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/features/Auth/authSlice";
 
 const Main = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user-update"));
-    const token = localStorage.getItem("token");
-    dispatch(
-      setUser({
-        user,
-        token,
-      })
-    );
-  }, []);
+
   return (
     <div className="w-full flex min-h-screen gap-5 px-5 relative">
       <div className="w-[320px]">

@@ -16,10 +16,15 @@ import TermsConditions from "../pages/Settings/TermsConditions";
 import EditTermsConditions from "../pages/Settings/EditTermsConditions";
 import AboutUs from "../pages/Settings/AboutUs";
 import EditAboutUs from "../pages/Settings/EditAboutUs";
+import AdminRoutes from "./AdminRoutes";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: (
+      <AdminRoutes>
+        <Main />
+      </AdminRoutes>
+    ),
     children: [
       {
         path: "/",
