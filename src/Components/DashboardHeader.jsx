@@ -22,16 +22,16 @@ const DashboardHeader = ({ className }) => {
         </div>
       </div>
       <div className="col-span-4 bg-[#FFF3E6] flex justify-between items-center px-4 rounded">
-        <div>
+        <div className=" w-16 h-16 overflow-hidden">
           <img
             src={
               user?.profilePictureUrl
-                ? `${import.meta.env.VITE_SERVER_URL}` +
+                ? `${import.meta.env.VITE_IMAGE_BASE_URL}` +
                   user.profilePictureUrl?.publicFileURL
                 : profileImage
             }
             alt=""
-            className="rounded-full w-16 h-16"
+            className="rounded-full w-full h-full object-cover"
           />
         </div>
         <div className="space-y-3 text-right">

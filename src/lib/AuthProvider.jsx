@@ -6,7 +6,7 @@ import { setUser } from "../redux/features/Auth/authSlice";
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
   const { data, isLoading } = useGetUserByTokenQuery();
-  //   console.log({ data, isLoading })
+  // console.log({ data, isLoading })
   useEffect(() => {
     if (!isLoading) {
       dispatch(
@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
         })
       );
     }
-  }, [data]);
+  }, [data, isLoading]);
   return children;
 };
 

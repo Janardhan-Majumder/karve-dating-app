@@ -22,16 +22,16 @@ const MyProfile = () => {
         autoComplete="off"
       >
         <div className="col-span-4 h-[365px] flex flex-col items-center justify-center bg-[#FFF3E6] px-8 py-8 rounded-xl border-2 border-[#FFD9B0] space-y-4">
-          <div className="my-3 ">
+          <div className="my-3 h-[144px] w-[144px] overflow-hidden">
             <img
               src={
                 user?.profilePictureUrl
-                  ? `${import.meta.env.VITE_SERVER_URL}` +
+                  ? `${import.meta.env.VITE_IMAGE_BASE_URL}` +
                     user.profilePictureUrl?.publicFileURL
                   : profileImage
               }
               alt=""
-              className="h-[144px] w-[144px] rounded-full"
+              className=" rounded-full w-full h-full object-cover"
             />
           </div>
           <h5 className="text-lg text-[#222222]">{"Profile"}</h5>

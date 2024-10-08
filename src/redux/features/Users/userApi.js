@@ -49,15 +49,19 @@ const usersApi = baseApi.injectEndpoints({
       },
       providesTags: ["user"],
     }),
-    // upadateProfile: builder.mutation({
-    //   query: ({ id, body }) => ({
-    //     url: `/users/${id}`,
-    //     method: "PUT",
-    //     body,
-    //   }),
-    //   invalidatesTags: ["user"],
-    // }),
+    upadateProfile: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `users/profile/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["user", "auth"],
+    }),
   }),
 });
 
-export const { useGetUserStatusQuery, useGetAllUserQuery } = usersApi;
+export const {
+  useGetUserStatusQuery,
+  useGetAllUserQuery,
+  useUpadateProfileMutation,
+} = usersApi;
