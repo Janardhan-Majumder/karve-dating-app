@@ -3,6 +3,7 @@ import { Button, Form, Input } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import profileImage from "../../../assets/images/demo-profile.jpg";
 
 const MyProfile = () => {
   const { user } = useSelector((state) => state.auth);
@@ -10,7 +11,7 @@ const MyProfile = () => {
   const onFinish = (values) => {
     navigate(`/edit-profile/${"123456fdsfa"}`);
   };
-
+// console.log(user)
   return (
     <div className="pt-5">
       <Form

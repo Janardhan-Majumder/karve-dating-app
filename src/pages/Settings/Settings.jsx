@@ -46,7 +46,7 @@ const Settings = () => {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Faild!",
+          title: "Failed!",
           text:
             response?.data?.message ||
             response?.error?.data?.message ||
@@ -90,7 +90,7 @@ const Settings = () => {
     if (isNaN(otp) || otp.length < 6) {
       return Swal.fire({
         icon: "error",
-        title: "Faild",
+        title: "Failed",
         text: "Please enter 6 digits OTP!.",
       });
     }
@@ -106,7 +106,7 @@ const Settings = () => {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Faild!",
+          title: "Failed!",
           text:
             response?.data?.message ||
             response?.error?.data?.message ||

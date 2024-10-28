@@ -16,20 +16,21 @@ const SignIn = () => {
   const from = location.state || "/";
   const onFinish = async (values) => {
     try {
-      const response = await setData(values);
-      if (response?.data?.statusCode == 200) {
-        if (response?.data?.data?.user?.role === "ADMIN") {
-          localStorage.setItem("token", response?.data?.data?.token);
+      const response = await setData(values).unwrap();
+      if (response?.statusCode == 200) {
+        if (response?.data?.user?.role === "ADMIN") {
+          // console.log(response.data.user)
+          localStorage.setItem("token", response?.data?.token);
           dispatch(
             setUser({
-              user: response?.data?.data?.user,
-              token: response?.data?.data?.token,
+              user: response?.data?.user,
+              token: response?.data?.token,
             })
           );
           Swal.fire({
             position: "top-center",
             icon: "success",
-            title: response?.data?.message,
+            title: response?.message,
             showConfirmButton: false,
             timer: 1000,
           });
@@ -37,25 +38,19 @@ const SignIn = () => {
         } else {
           Swal.fire({
             icon: "error",
-            title: "Login Failed!!",
+            title: "Failed!!",
             text: "You are not a Admin",
           });
         }
-      } else {
-        Swal.fire({
-          icon: "error",
-          title:
-            response?.data?.message ||
-            response?.error?.data?.message ||
-            "Login Failed!!",
-          text: "Something went wrong. Please try again later.",
-        });
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Login Failed!!",
-        text: "Something went wrong. Please try again later.",
+        title: "Failed!!",
+        text:
+          error?.data?.message ||
+          error?.error?.data?.message ||
+          "Something went wrong. Please try again later.",
       });
     }
   };

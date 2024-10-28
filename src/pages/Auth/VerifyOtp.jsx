@@ -16,7 +16,7 @@ const VerifyOtp = () => {
     if (isNaN(otp) || otp.length < 6) {
       return Swal.fire({
         icon: "error",
-        title: "Faild",
+        title: "Failed",
         text: "Please enter 6 digits OTP!.",
       });
     }
@@ -32,7 +32,7 @@ const VerifyOtp = () => {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Faild!",
+          title: "Failed!",
           text:
             response?.data?.message ||
             response?.error?.data?.message ||
@@ -99,7 +99,7 @@ const VerifyOtp = () => {
               type="primary"
               className="w-full bg-[#FF8400] h-[59px] text-base font-medium text-white rounded-lg"
             >
-              Verify Email {isLoading && <CustomSpinner />}
+              Verify OTP {isLoading && <CustomSpinner />}
             </Button>
           </Form.Item>
         </Form>

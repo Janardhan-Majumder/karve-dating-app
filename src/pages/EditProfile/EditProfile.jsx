@@ -31,6 +31,7 @@ const EditProfile = () => {
         body: formData,
       });
       if (res?.data?.statusCode == 200) {
+        navigate(-1);
         setImageFile(null);
         Swal.fire({
           icon: "success",
@@ -40,7 +41,7 @@ const EditProfile = () => {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Update Faild!!",
+          title: "Update Failed!!",
           text:
             res?.data?.message ||
             res?.error?.data?.message ||
@@ -122,10 +123,7 @@ const EditProfile = () => {
             label="Email"
             name="email"
           >
-            <Input
-              readOnly
-              className="h-[56px] border rounded-lg border-[#FFAD54] bg-[#FFF3E6] disabled:text-[#222222] disabled:bg-[#FFF3E6] mt-3"
-            />
+            <Input className="h-[56px] border rounded-lg border-[#FFAD54] bg-[#FFF3E6] disabled:text-[#222222] disabled:bg-[#FFF3E6] mt-3" />
           </Form.Item>
           <Form.Item
             className="text-lg text-[#222222] font-medium"

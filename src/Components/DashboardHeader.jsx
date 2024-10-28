@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import dashboardLaptop from "../assets/images/dashboard-laptop.png";
 import profileImage from "../assets/images/demo-profile.jpg";
 import { useSelector } from "react-redux";

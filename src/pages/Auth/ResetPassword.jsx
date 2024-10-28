@@ -30,7 +30,7 @@ const ResetPassword = () => {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Faild!",
+          title: "Failed!",
           text:
             response?.data?.message ||
             response?.error?.data?.message ||
