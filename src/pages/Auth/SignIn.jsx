@@ -21,9 +21,14 @@ const SignIn = () => {
         if (response?.data?.user?.role === "ADMIN") {
           // console.log(response.data.user)
           localStorage.setItem("token", response?.data?.token);
+          const user = response?.data?.user;
           dispatch(
             setUser({
-              user: response?.data?.user,
+              user: {
+                ...user,
+                name: user.userName,
+                profilePictureUrl: user.profile,
+              },
               token: response?.data?.token,
             })
           );
