@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import dayjs from 'dayjs';
 import { Button, DatePicker, Input, Space, Table, Tag } from "antd";
 import { FiAlertCircle } from "react-icons/fi";
 import UserDetailsModal from "../../../Components/UserDetailsModal";
 import { IoSearch } from "react-icons/io5";
 import LoaderWraperComp from "../../../Components/LoaderWraperComp";
 import { useGetAllUserQuery } from "../../../redux/features/Users/userApi";
+const { RangePicker } = DatePicker;
 
 const Users = () => {
   const [searchQuery, setSearchQuery] = useState({});
@@ -38,6 +40,14 @@ const Users = () => {
     // let date = `${$M}-${$D}-${$y}`;
     // console.log(date);
     setSearchQuery((c) => ({ ...c, date: dateString }));
+  };
+  const onRangeChange = (dates, dateStrings) => {
+    if (dates) {
+      console.log("From: ", dates[0], ", to: ", dates[1]);
+      console.log("From: ", dateStrings[0], ", to: ", dateStrings[1]);
+    } else {
+      console.log("Clear");
+    }
   };
   const showModal = (data) => {
     setIsModalOpen(true);
@@ -101,7 +111,24 @@ const Users = () => {
       ),
     },
   ];
-
+  const rangePresets = [
+    {
+      label: "Last 7 Days",
+      value: [dayjs().add(-7, "d"), dayjs()],
+    },
+    {
+      label: "Last 14 Days",
+      value: [dayjs().add(-14, "d"), dayjs()],
+    },
+    {
+      label: "Last 30 Days",
+      value: [dayjs().add(-30, "d"), dayjs()],
+    },
+    {
+      label: "Last 90 Days",
+      value: [dayjs().add(-90, "d"), dayjs()],
+    },
+  ];
   return (
     <div>
       <div className="bg-[#FFF3E6] rounded-xl">
@@ -110,19 +137,40 @@ const Users = () => {
           <div className="flex justify-end gap-2">
             <DatePicker
               placeholder="Date"
-              className="custom-datepicker focus:outline-none border-none rounded-full text-[#222222] text-sm w-48"
+              className="custom-datepicker focus:outline-none border-none rounded-full text-[#222222] text-sm"
               onChange={onChange}
+              style={{ width: "110px" }}
+            />
+            <RangePicker
+              placeholder="Date"
+              presets={rangePresets}
+              onChange={onRangeChange}
+              className="custom-datepicker focus:outline-none border-none rounded-full text-[#222222] text-sm"
+              style={{ width: "180px" }}
             />
             <Input
               onChange={(e) =>
                 setSearchQuery((c) => ({
-                  ...c,
-                  name: "",
+                  // ...c,
+                  // name: "",
+                  address: e.target.value,
+                }))
+              }
+              className="focus:outline-none border-none rounded-full placeholder:text-[#222222] text-sm"
+              placeholder="Address"
+              style={{ width: "180px" }}
+            />
+            <Input
+              onChange={(e) =>
+                setSearchQuery((c) => ({
+                  // ...c,
+                  // name: "",
                   userName: e.target.value,
                 }))
               }
               className="focus:outline-none border-none rounded-full placeholder:text-[#222222] text-sm"
               placeholder="User Name"
+              style={{ width: "180px" }}
             />
             <Button
               onClick={() =>
