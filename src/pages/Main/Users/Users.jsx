@@ -63,6 +63,12 @@ const Users = () => {
       dataIndex: "phone",
     },
     {
+      title: "Address",
+      key: "address",
+      // dataIndex: "address",
+      render: (_, record) => <p>{record.address || "N/A"}</p>,
+    },
+    {
       title: "Join Date",
       key: "joinDate",
       render: (_, record) => <p>{new Date(record.createdAt).toDateString()}</p>,

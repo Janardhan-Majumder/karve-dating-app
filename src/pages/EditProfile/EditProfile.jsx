@@ -130,6 +130,7 @@ const EditProfile = () => {
             label="Phone Number"
           >
             <PhoneInput
+            readOnly
               className="custom-phone "
               placeholder="Enter phone number"
               international
