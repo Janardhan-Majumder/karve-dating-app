@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import { Button, DatePicker, Input, Space, Table, Tag } from "antd";
 import { FiAlertCircle } from "react-icons/fi";
 import UserDetailsModal from "../../../Components/UserDetailsModal";
@@ -34,6 +34,18 @@ const Users = () => {
       name: "name",
       value: searchQuery?.name ? searchQuery?.name : "",
     },
+    {
+      name: "address",
+      value: searchQuery?.address ? searchQuery?.address : "",
+    },
+    {
+      name: "startDate",
+      value: searchQuery?.startDate ? searchQuery?.startDate : "",
+    },
+    {
+      name: "endDate",
+      value: searchQuery?.endDate ? searchQuery?.endDate : "",
+    },
   ]);
   const onChange = (_date, dateString) => {
     // let { $D, $M, $y } = _date;
@@ -43,10 +55,17 @@ const Users = () => {
   };
   const onRangeChange = (dates, dateStrings) => {
     if (dates) {
-      console.log("From: ", dates[0], ", to: ", dates[1]);
-      console.log("From: ", dateStrings[0], ", to: ", dateStrings[1]);
+      setSearchQuery((c) => ({
+        ...c,
+        fromDate: dates[0],
+        toDate: dates[1],
+      }));
     } else {
-      console.log("Clear");
+      setSearchQuery((c) => ({
+        ...c,
+        startDate: "",
+        endDate: "",
+      }));
     }
   };
   const showModal = (data) => {
@@ -83,19 +102,19 @@ const Users = () => {
       key: "joinDate",
       render: (_, record) => <p>{new Date(record.createdAt).toDateString()}</p>,
     },
-    {
-      title: "Online",
-      key: "online",
-      render: (_, record) => (
-        <p>
-          {record.isOnline ? (
-            <span className="text-yellow-400">Active</span>
-          ) : (
-            <span className="text-gray-400">In-Active</span>
-          )}
-        </p>
-      ),
-    },
+    // {
+    //   title: "Online",
+    //   key: "online",
+    //   render: (_, record) => (
+    //     <p>
+    //       {record.isOnline ? (
+    //         <span className="text-yellow-400">Active</span>
+    //       ) : (
+    //         <span className="text-gray-400">In-Active</span>
+    //       )}
+    //     </p>
+    //   ),
+    // },
     {
       title: "Action",
       key: "action",
@@ -135,23 +154,28 @@ const Users = () => {
         <div className="px-5 py-3 flex justify-between items-center">
           <h3 className="text-xl font-medium text-[#464343]">{"User list"}</h3>
           <div className="flex justify-end gap-2">
-            <DatePicker
+            {/* <DatePicker
               placeholder="Date"
               className="custom-datepicker focus:outline-none border-none rounded-full text-[#222222] text-sm"
               onChange={onChange}
               style={{ width: "110px" }}
-            />
-            <RangePicker
-              placeholder="Date"
-              presets={rangePresets}
-              onChange={onRangeChange}
-              className="custom-datepicker focus:outline-none border-none rounded-full text-[#222222] text-sm"
+            /> */}
+            <Input
+              onChange={(e) =>
+                setSearchQuery((c) => ({
+                  ...c,
+                  // name: "",
+                  name: e.target.value,
+                }))
+              }
+              className="focus:outline-none border-none rounded-full placeholder:text-[#222222] text-sm"
+              placeholder="User Name"
               style={{ width: "180px" }}
             />
             <Input
               onChange={(e) =>
                 setSearchQuery((c) => ({
-                  // ...c,
+                  ...c,
                   // name: "",
                   address: e.target.value,
                 }))
@@ -160,21 +184,20 @@ const Users = () => {
               placeholder="Address"
               style={{ width: "180px" }}
             />
-            <Input
-              onChange={(e) =>
-                setSearchQuery((c) => ({
-                  // ...c,
-                  // name: "",
-                  userName: e.target.value,
-                }))
-              }
-              className="focus:outline-none border-none rounded-full placeholder:text-[#222222] text-sm"
-              placeholder="User Name"
-              style={{ width: "180px" }}
+            <RangePicker
+              placeholder="Date"
+              presets={rangePresets}
+              onChange={onRangeChange}
+              className="custom-datepicker focus:outline-none border-none rounded-full text-[#222222] text-sm"
+              style={{ width: "220px" }}
             />
             <Button
               onClick={() =>
-                setSearchQuery((c) => ({ ...c, name: c?.userName || "" }))
+                setSearchQuery((c) => ({
+                  ...c,
+                  startDate: c?.fromDate || "",
+                  endDate: c?.toDate || "",
+                }))
               }
               className="bg-[#FF8400] text-white"
               type="default"

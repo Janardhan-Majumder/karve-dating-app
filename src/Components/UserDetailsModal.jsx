@@ -44,7 +44,7 @@ const UserDetailsModal = ({ isModalOpen, setIsModalOpen, userDetails }) => {
           </div>
           <div className="flex justify-between">
             <p>Address</p>
-            <p className="font-medium">{"Dhaka, Bangladesh"}</p>
+            <p className="font-medium">{userDetails.address || "N/A"}</p>
           </div>
           <div className="flex justify-between">
             <p>Joining Date</p>

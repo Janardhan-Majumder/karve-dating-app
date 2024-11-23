@@ -51,23 +51,29 @@ const DashboardHome = () => {
       dataIndex: "phone",
     },
     {
+      title: "Address",
+      key: "address",
+      // dataIndex: "address",
+      render: (_, record) => <p>{record.address || "N/A"}</p>,
+    },
+    {
       title: "Join Date",
       key: "joinDate",
       render: (_, record) => <p>{new Date(record.createdAt).toDateString()}</p>,
     },
-    {
-      title: "Online",
-      key: "online",
-      render: (_, record) => (
-        <p>
-          {record.isOnline ? (
-            <span className="text-yellow-400">Active</span>
-          ) : (
-            <span className="text-gray-400">In-Active</span>
-          )}
-        </p>
-      ),
-    },
+    // {
+    //   title: "Online",
+    //   key: "online",
+    //   render: (_, record) => (
+    //     <p>
+    //       {record.isOnline ? (
+    //         <span className="text-yellow-400">Active</span>
+    //       ) : (
+    //         <span className="text-gray-400">In-Active</span>
+    //       )}
+    //     </p>
+    //   ),
+    // },
     {
       title: "Action",
       key: "action",
